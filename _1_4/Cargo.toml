@@ -1,0 +1,8 @@
+[package]
+name = "_1_4"
+version = "0.1.0"
+authors = ["Wojciech Moczulski <womoczulski@gmail.com>"]
+
+[dependencies]
+bit-vec = "0.4.4"
+
