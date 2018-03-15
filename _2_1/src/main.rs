@@ -7,7 +7,7 @@ type Board = Vec<Vec<bool>>;
 
 
 const PPB1: usize = 100;
-const PPB2: usize = 0;
+const PPB2: usize = 100;
 
 fn rand() -> usize {
     static mut SEED: i64 = 123456789;
@@ -81,8 +81,8 @@ fn row_diff(row: &Vec<bool>, target_row: &Vec<usize>) -> usize {
 fn col_diff(board: &Board, col_n: usize, target_col: &Vec<usize>) -> usize {
     let mut as_row = Vec::new();
 
-    for i in 0..board[0].len() {
-        as_row.push(board[i][col_n]);
+    for row_n in 0..board.len() {
+        as_row.push(board[row_n][col_n]);
     }
 
     return row_diff(&as_row, target_col);
@@ -109,7 +109,6 @@ fn get_bad_cols(board: &mut Board, target_cols: &Vec<Vec<usize>>) -> Vec<usize> 
 }
 
 fn improvement(board: &mut Board, row_n: usize, col_n: usize, target_row: &Vec<usize>, target_col: &Vec<usize>) -> isize {
-//    println!("{:?} {:?}", row_diff(&board[row_n], &target_row) as isize , col_diff(&board, col_n, target_col) as isize);
     let a: isize = row_diff(&board[row_n], &target_row) as isize + col_diff(&board, col_n, target_col) as isize;
 
     board[row_n][col_n] = !board[row_n][col_n];
@@ -202,9 +201,9 @@ fn play(mut board: &mut Board, target_rows: &Vec<Vec<usize>>, target_cols: &Vec<
             fix_col(&mut board, col, target_rows, target_cols);
         }
 
-//        if step % 1000 == 0 {
-//            print_board(board);
-//        }
+        if step % 1000 == 0 {
+            print_board(board);
+        }
     }
 }
 
